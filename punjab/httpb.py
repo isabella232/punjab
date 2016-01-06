@@ -380,8 +380,7 @@ class Httpb(resource.Resource):
             log.msg("HTTPB POST : ")
             log.msg(str(request.content.read()))
             request.content.seek(0, 0)
-        if self.service.proxy_protocol_port is not None:
-            self.service.forward_ip = request.getHeader("x-forwarded-for")
+        self.service.forward_ip = request.getHeader("x-forwarded-for")
 
         def on_finished(reason):
             setattr(request, 'finished', True)
